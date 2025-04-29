@@ -675,7 +675,7 @@ func (adm *AdminClient) ListAccessKeysBulk(ctx context.Context, users []string, 
 	}
 
 	reqData := requestData{
-		relPath:     adminAPIPrefix + "/list-access-keys-bulk",
+		relPath:     adminAPIPrefix + "/list-access-keys-bulk1",
 		queryValues: queryValues,
 	}
 
