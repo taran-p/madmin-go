@@ -939,7 +939,8 @@ func (adm *AdminClient) RevokeTokensLDAP(ctx context.Context, opts RevokeTokensR
 }
 
 type LDAPSpecificAccessKeyInfo struct {
-	Username string `json:"username"`
+	Username   string `json:"username"`
+	ConfigName string `json:"configName"`
 }
 
 type OpenIDSpecificAccessKeyInfo struct {
