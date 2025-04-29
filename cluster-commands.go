@@ -637,8 +637,9 @@ type OpenIDSettings struct {
 // IDPSettings contains key IDentity Provider settings to validate that all
 // peers have the same configuration.
 type IDPSettings struct {
-	LDAP   LDAPSettings
-	OpenID OpenIDSettings
+	LDAP        LDAPSettings
+	LDAPConfigs LDAPConfigSettings
+	OpenID      OpenIDSettings
 }
 
 // LDAPSettings contains LDAP configuration info of a cluster.
@@ -648,6 +649,19 @@ type LDAPSettings struct {
 	LDAPUserDNSearchFilter string
 	LDAPGroupSearchBase    string
 	LDAPGroupSearchFilter  string
+}
+
+type LDAPProviderSettings struct {
+	UserDNSearchBase   string
+	UserDNSearchFilter string
+	GroupSearchBase    string
+	GroupSearchFilter  string
+}
+
+// LDAPConfigSettings contains LDAP configuration info of all providers in a cluster.
+type LDAPConfigSettings struct {
+	Enabled bool
+	Configs map[string]LDAPProviderSettings
 }
 
 // SRPeerGetIDPSettings - fetches IDP settings from the server.
