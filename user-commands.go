@@ -643,7 +643,7 @@ func (opts *ListAccessKeysOpts) BuiltinValidate(n int) error {
 }
 
 func (opts *ListAccessKeysOpts) LDAPValidate(n int) error {
-	return opts.BuiltinValidate(n)
+	return opts.OpenIDValidate(n)
 }
 
 func (opts *ListAccessKeysOpts) OpenIDValidate(n int) error {
@@ -985,4 +985,15 @@ func (adm *AdminClient) InfoAccessKey(ctx context.Context, accessKey string) (In
 		return InfoAccessKeyResp{}, err
 	}
 	return infoResp, nil
+}
+
+type LDAPUserAccessKeys struct {
+	DN              string               `json:"dn"`
+	ServiceAccounts []ServiceAccountInfo `json:"serviceAccounts"`
+	STSKeys         []ServiceAccountInfo `json:"stsKeys"`
+}
+
+type ListAccessKeysLDAPRespV2 struct {
+	ConfigName string               `json:"configName"`
+	Users      []LDAPUserAccessKeys `json:"users"`
 }

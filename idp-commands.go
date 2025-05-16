@@ -490,3 +490,50 @@ func (adm *AdminClient) ListAccessKeysLDAPBulkWithOpts(ctx context.Context, user
 	}
 	return listResp, nil
 }
+
+// ListAccessKeysLDAPBulkV2 - list access keys belonging to the given users or all users
+func (adm *AdminClient) ListAccessKeysLDAPBulkV2(ctx context.Context, users []string, opts ListAccessKeysOpts) ([]ListAccessKeysLDAPRespV2, error) {
+	if err := opts.OpenIDValidate(len(users)); err != nil {
+		return nil, err
+	}
+
+	queryValues := url.Values{}
+	queryValues.Set("listType", opts.ListType)
+	queryValues["users"] = users
+	if opts.All {
+		queryValues.Set("all", "true")
+	}
+	if opts.ConfigName != "" {
+		queryValues.Set("configName", opts.ConfigName)
+	}
+	if opts.AllConfigs {
+		queryValues.Set("allConfigs", "true")
+	}
+
+	reqData := requestData{
+		relPath:     adminAPIPrefixV4 + "/idp/ldap/list-access-keys-bulk/v2",
+		queryValues: queryValues,
+	}
+
+	// Execute GET on /minio/admin/v4/list-access-keys-bulk/ dv2
+	resp, err := adm.executeMethod(ctx, http.MethodGet, reqData)
+	defer closeResponse(resp)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, httpRespToErrorResponse(resp)
+	}
+
+	data, err := DecryptData(adm.getSecretKey(), resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var listResp []ListAccessKeysLDAPRespV2
+	if err = json.Unmarshal(data, &listResp); err != nil {
+		return nil, err
+	}
+	return listResp, nil
+}
