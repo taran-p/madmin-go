@@ -562,7 +562,7 @@ func (adm *AdminClient) ListAccessKeysLDAPBulkV2(ctx context.Context, users []st
 	}
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/idp/ldap/list-access-keys-bulk/v2",
+		relPath:     adminAPIPrefix + "/idp/ldap/list-access-keys-bulk/v2",
 		queryValues: queryValues,
 	}
 
