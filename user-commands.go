@@ -345,6 +345,8 @@ type AddServiceAccountReq struct {
 	Description string `json:"description,omitempty"`
 	// Time at which this access key expires
 	Expiration *time.Time `json:"expiration,omitempty"`
+	// ConfigName of the parent user for compatible IDPs
+	ConfigName string `json:"configName,omitempty"`
 }
 
 var serviceAcctValidNameRegex = regexp.MustCompile(`^[a-zA-Z][a-zA-Z0-9_-]*`)
@@ -879,6 +881,7 @@ type RevokeTokensReq struct {
 	User            string `json:"user"`
 	TokenRevokeType string `json:"tokenRevokeType"`
 	FullRevoke      bool   `json:"fullRevoke"`
+	ConfigName      string `json:"configName"`
 }
 
 func (r *RevokeTokensReq) Validate() error {
@@ -897,6 +900,9 @@ func (adm *AdminClient) revokeTokens(ctx context.Context, opts RevokeTokensReq, 
 	queryValues.Set("tokenRevokeType", opts.TokenRevokeType)
 	if opts.FullRevoke {
 		queryValues.Set("fullRevoke", "true")
+	}
+	if opts.ConfigName != "" {
+		queryValues.Set("configName", opts.ConfigName)
 	}
 
 	reqData := requestData{
