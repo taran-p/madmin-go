@@ -88,7 +88,7 @@ func (adm *AdminClient) SiteReplicationAdd(ctx context.Context, sites []PeerSite
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/add",
+		relPath:     adminAPIPrefix + "/site-replication/add",
 		content:     encBytes,
 		queryValues: q,
 	}
@@ -131,7 +131,7 @@ func (adm *AdminClient) SiteReplicationInfo(ctx context.Context) (info SiteRepli
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/info",
+		relPath:     adminAPIPrefix + "/site-replication/info",
 		queryValues: q,
 	}
 
@@ -209,7 +209,7 @@ func (adm *AdminClient) SRPeerJoin(ctx context.Context, r SRPeerJoinReq) error {
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/peer/join",
+		relPath:     adminAPIPrefix + "/site-replication/peer/join",
 		content:     encBuf,
 		queryValues: q,
 	}
@@ -261,7 +261,7 @@ func (adm *AdminClient) SRPeerBucketOps(ctx context.Context, bucket string, op B
 
 	reqData := requestData{
 		queryValues: v,
-		relPath:     adminAPIPrefixV4 + "/site-replication/peer/bucket-ops",
+		relPath:     adminAPIPrefix + "/site-replication/peer/bucket-ops",
 	}
 
 	resp, err := adm.executeMethod(ctx, http.MethodPut, reqData)
@@ -467,7 +467,7 @@ func (adm *AdminClient) SRPeerReplicateIAMItem(ctx context.Context, item SRIAMIt
 	q.Add("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/peer/iam-item",
+		relPath:     adminAPIPrefix + "/site-replication/peer/iam-item",
 		content:     b,
 		queryValues: q,
 	}
@@ -548,7 +548,7 @@ func (adm *AdminClient) SRPeerReplicateBucketMeta(ctx context.Context, item SRBu
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/peer/bucket-meta",
+		relPath:     adminAPIPrefix + "/site-replication/peer/bucket-meta",
 		content:     b,
 		queryValues: q,
 	}
@@ -670,7 +670,7 @@ func (adm *AdminClient) SRPeerGetIDPSettings(ctx context.Context) (info IDPSetti
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/peer/idp-settings",
+		relPath:     adminAPIPrefix + "/site-replication/peer/idp-settings",
 		queryValues: q,
 	}
 
@@ -739,7 +739,7 @@ func (adm *AdminClient) SRMetaInfo(ctx context.Context, opts SRStatusOptions) (i
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/metainfo",
+		relPath:     adminAPIPrefix + "/site-replication/metainfo",
 		queryValues: q,
 	}
 
@@ -981,7 +981,7 @@ func (adm *AdminClient) SRStatusInfo(ctx context.Context, opts SRStatusOptions) 
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/status",
+		relPath:     adminAPIPrefix + "/site-replication/status",
 		queryValues: q,
 	}
 
@@ -1034,7 +1034,7 @@ func (adm *AdminClient) SiteReplicationEdit(ctx context.Context, site PeerInfo, 
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/edit",
+		relPath:     adminAPIPrefix + "/site-replication/edit",
 		content:     encBytes,
 		queryValues: q,
 	}
@@ -1066,7 +1066,7 @@ func (adm *AdminClient) SRPeerEdit(ctx context.Context, pi PeerInfo) error {
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/peer/edit",
+		relPath:     adminAPIPrefix + "/site-replication/peer/edit",
 		content:     b,
 		queryValues: q,
 	}
@@ -1096,7 +1096,7 @@ func (adm *AdminClient) SRStateEdit(ctx context.Context, state SRStateEditReq) e
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/state/edit",
+		relPath:     adminAPIPrefix + "/site-replication/state/edit",
 		content:     b,
 		queryValues: q,
 	}
@@ -1124,7 +1124,7 @@ func (adm *AdminClient) SiteReplicationRemove(ctx context.Context, removeReq SRR
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/remove",
+		relPath:     adminAPIPrefix + "/site-replication/remove",
 		content:     rmvBytes,
 		queryValues: q,
 	}
@@ -1154,7 +1154,7 @@ func (adm *AdminClient) SRPeerRemove(ctx context.Context, removeReq SRRemoveReq)
 	q.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/peer/remove",
+		relPath:     adminAPIPrefix + "/site-replication/peer/remove",
 		content:     reqBytes,
 		queryValues: q,
 	}
@@ -1241,7 +1241,7 @@ func (adm *AdminClient) SiteReplicationResyncOp(ctx context.Context, site PeerIn
 	v.Set("api-version", SiteReplAPIVersion)
 
 	reqData := requestData{
-		relPath:     adminAPIPrefixV4 + "/site-replication/resync/op",
+		relPath:     adminAPIPrefix + "/site-replication/resync/op",
 		content:     reqBytes,
 		queryValues: v,
 	}
@@ -1299,6 +1299,9 @@ type InQueueMetric struct {
 	Max  QStat `json:"max" msg:"pq"`
 }
 
+// InProgressMetric holds stats for objects with replication in progress
+type InProgressMetric InQueueMetric
+
 // QStat represents number of objects and bytes in queue
 type QStat struct {
 	Count float64 `json:"count"`
@@ -1321,6 +1324,8 @@ type SRMetricsSummary struct {
 	ReplicaCount int64 `json:"replicaCount"`
 	// queue metrics
 	Queued InQueueMetric `json:"queued"`
+	// in progress metrics
+	InProgress InProgressMetric `json:"inProgress"`
 	// proxied metrics
 	Proxied ReplProxyMetric `json:"proxied"`
 	// replication metrics summary for each site replication peer

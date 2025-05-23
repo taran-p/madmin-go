@@ -77,7 +77,7 @@ type AdminClient struct {
 // Global constants.
 const (
 	libraryName    = "madmin-go"
-	libraryVersion = "4.0.0"
+	libraryVersion = "4.0.6"
 
 	libraryAdminURLPrefix = "/minio/admin"
 	libraryKMSURLPrefix   = "/minio/kms"
@@ -396,6 +396,11 @@ func (adm AdminClient) executeMethod(ctx context.Context, method string, reqData
 			if httpStatus == res.StatusCode {
 				return res, nil
 			}
+		}
+
+		if res.StatusCode == http.StatusUpgradeRequired {
+			reqData.relPath = strings.ReplaceAll(reqData.relPath, adminAPIPrefix, adminAPIOldPrefix)
+			continue // Retry when an upgrade is requested.
 		}
 
 		// Read the body to be saved later.
