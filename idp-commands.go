@@ -519,6 +519,9 @@ func (adm *AdminClient) ListAccessKeysLDAPBulkWithOpts(ctx context.Context, user
 	if opts.All {
 		queryValues.Set("all", "true")
 	}
+	if opts.ConfigName != "" {
+		queryValues.Set("configName", opts.ConfigName)
+	}
 
 	reqData := requestData{
 		relPath:     adminAPIPrefix + "/idp/ldap/list-access-keys-bulk",
