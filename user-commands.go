@@ -978,6 +978,30 @@ type LDAPSpecificAccessKeyInfo struct {
 	Username   string `json:"username"`
 }
 
+// OpenIDStandardClaims represents the standard claims defined in the OpenID
+// Connect Core 1.0 specification, Section 5.1.
+type OpenIDStandardClaims struct {
+	Sub                 string `json:"sub,omitempty"`
+	Name                string `json:"name,omitempty"`
+	GivenName           string `json:"given_name,omitempty"`
+	FamilyName          string `json:"family_name,omitempty"`
+	MiddleName          string `json:"middle_name,omitempty"`
+	Nickname            string `json:"nickname,omitempty"`
+	PreferredUsername   string `json:"preferred_username,omitempty"`
+	Profile             string `json:"profile,omitempty"`
+	Picture             string `json:"picture,omitempty"`
+	Website             string `json:"website,omitempty"`
+	Email               string `json:"email,omitempty"`
+	EmailVerified       bool   `json:"email_verified,omitempty"`
+	Gender              string `json:"gender,omitempty"`
+	Birthdate           string `json:"birthdate,omitempty"`
+	Zoneinfo            string `json:"zoneinfo,omitempty"`
+	Locale              string `json:"locale,omitempty"`
+	PhoneNumber         string `json:"phone_number,omitempty"`
+	PhoneNumberVerified bool   `json:"phone_number_verified,omitempty"`
+	UpdatedAt           int64  `json:"updated_at,omitempty"`
+}
+
 type OpenIDSpecificAccessKeyInfo struct {
 	ConfigName       string `json:"configName"`
 	UserID           string `json:"userID"`
@@ -985,8 +1009,7 @@ type OpenIDSpecificAccessKeyInfo struct {
 	DisplayName      string `json:"displayName,omitempty"`
 	DisplayNameClaim string `json:"displayNameClaim,omitempty"`
 
-	Email             string `json:"email,omitempty"`
-	PreferredUsername string `json:"preferredUsername,omitempty"`
+	StandardClaims OpenIDStandardClaims `json:"standardClaims,omitempty"`
 }
 
 // InfoAccessKeyResp is the response body of the info access key call

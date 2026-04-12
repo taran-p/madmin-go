@@ -225,10 +225,11 @@ func (adm *AdminClient) CheckIDPConfig(ctx context.Context, cfgType, cfgName str
 
 // IDPListItem - represents an item in the List IDPs call.
 type IDPListItem struct {
-	Type    string `json:"type"`
-	Name    string `json:"name"`
-	Enabled bool   `json:"enabled"`
-	RoleARN string `json:"roleARN,omitempty"`
+	Type        string `json:"type"`
+	Name        string `json:"name"`
+	Enabled     bool   `json:"enabled"`
+	RoleARN     string `json:"roleARN,omitempty"`
+	DisplayName string `json:"displayName"`
 }
 
 // ListIDPConfig - list IDP configuration on the server.
